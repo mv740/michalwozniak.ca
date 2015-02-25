@@ -57,6 +57,7 @@
     visibility: hidden !important;
   }
 }
+
 @media screen and (min-width: 1024px) {
   .no-desktop {
     display: none !important;

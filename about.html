@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>michal wozniak</title>
+
+    <!-- CSS -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.min.css" rel="stylesheet">
+    <link href="css/MetroJs.lt.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/metro.min.js"></script>
+    <script src="js/metro-dialog.js"></script>
+    <script src="js/MetroJs.lt.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".live-tile,.flip-list").not(".exclude").liveTile(
+                    {
+                        delay:0,
+                        startNow:true
+                    }
+            );
+
+
+            //flip on hover
+            var $tiles = $("#twitterTile").liveTile({
+                playOnHover: true,
+                repeatCount: 0,
+                delay: 0,
+                startNow: false
+            });
+
+
+        });
+        /* open modal pdf*/
+        $("#resume").on('click', function(){
+            $.Dialog({
+                shadow: true,
+                overlay: false,
+                icon: '<span class="icon-rocket"></span>',
+                title: 'Title',
+                width: 500,
+                padding: 10,
+                content: 'Window content here'
+            });
+        });
+    </script>
+
+
+</head>
+<body class="metro">
+
+<div class="tile-area-dark">
+    <div class="container">
+        <br/>
+
+        <h1 class="tile-area-title fg-white">Michal Wozniak</h1>
+
+        <h3 class="tile-area-title fg-white">Software Developer</h3>
+        <br/>
+
+        <div class="grid">
+            <div class="tile-group double">
+                <div class="">
+                    <a href="http://localhost/ca/index1.html" class="tile double bg-steel" data-click="transform">
+                        <div class="tile-content">
+                            <div class="tile-content image">
+                                <img src="img/doubletile.png">
+                            </div>
+                        </div>
+                        <div class="tile-status">
+                            <div class="label">Me</div>
+                        </div>
+                    </a>
+                    <a class="tile  bg-darkBlue" data-click="transform">
+                        <div>
+                            <div class="tile-content icon">
+                                <span class="icon-user-3"></span>
+                            </div>
+                            <div class="brand">
+                                <div class="label">About</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="tile  bg-darkGreen" data-click="transform">
+                        <div class="tile-content icon">
+                            <span class="icon-laptop"></span>
+                        </div>
+                        <div class="brand">
+                            <div class="label">Projects</div>
+                        </div>
+                    </a>
+                    <a class="tile  bg-red" data-click="transform">
+                        <div class="tile-content icon">
+                            <span class="icon-rocket"></span>
+                        </div>
+                        <div class="brand">
+                            <div class="label">Interests</div>
+                        </div>
+                    </a>
+                    <a class="tile  bg-blue" data-click="transform">
+                        <div class="tile-content icon">
+                            <span class="icon-mail"></span>
+                        </div>
+                        <div class="brand">
+                            <div class="label">Contact</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="tile-group ">
+                <div class="tile-group-title marker-on-top">
+                    <span class="subheader-secondary fg-white">
+                        <a href="http://localhost/ca/index1.html" data-click="transform">
+                            <i class="icon-arrow-left-3"></i>
+                        </a>
+                        About</span>
+                </div>
+                <a class="tile triple  double-vertical bg-orange" data-click="">
+                    <div class="tile-content content fg-black">
+                        <div class="padding10">
+                            <h3 class="fg-white ">Hello!</h3>
+
+                            <p class="tertiary-text fg-white text-justify">
+                                My name is Michal, I'm currently completing my Bachelor of Software Engineering at
+                                Concordia University in Montreal, Canada
+                            </p>
+
+                            <p class="tertiary-text fg-white text-justify">
+                                I am passionate about anything related to technology. I am of the few that live on
+                                the bleeding edge trying out all the cool new toys. LeapMotion, Raspbery Pi, Adruino,
+                                I got them all.
+                            </p>
+
+                            <p class="tertiary-text fg-white text-center"><i class="icon-lamp-2"></i></p>
+
+                            <p class="tertiary-text fg-white text-justify">
+                                Don't forget to explore my projects or the cool gadgets i have.
+                            </p>
+
+
+                        </div>
+
+
+                    </div>
+                </a>
+                <a class="tile  bg-blue resume" href="file/resume.pdf" data-click="transform">
+                    <div class="tile-content icon">
+                        <span class=" icon-download-2"></span>
+                    </div>
+                    <div class="brand">
+                        <div class="label">Resume</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

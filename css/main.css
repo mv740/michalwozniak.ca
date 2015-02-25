@@ -1,0 +1,76 @@
+
+
+.break
+{
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+.break2
+{
+    padding-top: 0px;
+    padding-bottom: 15px;
+}
+
+.justify
+{
+    text-align: justify;
+}
+
+
+.logo{
+    width: 195px;
+}
+
+/* center nav item for small screen*/
+@media screen and  (max-width: 1200px)
+{
+    .mobileCenter
+    {
+        text-align: center;
+    }
+}
+
+.topBreak
+{
+    margin-top: 200px;
+}
+
+/* metro*/
+.tiles-group
+{
+    width: auto;
+    height: 90%;
+    overflow-x: visible;
+    white-space: nowrap;
+    margin-top: 80px;
+}
+
+.tile-col1
+{
+    width: auto;
+    max-width: 260px;
+    display: inline-block;
+    height: 100%;
+    margin-right: 30px;
+}
+
+.tile-col2
+{
+    width: auto;
+    max-width: 520px;
+    display: inline-block;
+    height: 100%;
+    margin-right: 30px;
+}
+
+.tile-col3
+{
+    width: auto;
+    max-width: 780px;
+    display: inline-block;
+    height: 100%;
+    margin-right: 30px;
+}
+
+
+/**ddddddddddddddd*/
