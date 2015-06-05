@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="css/metro.min.css" rel="stylesheet">
+    <link href="css/metro-icons.min.css" rel="stylesheet">
+    <link href="css/michalwozniak.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
+    <script src="js/metro.min.js"></script>
+    <script src="js/michalwozniak.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('form').on('reset', function(e){clearValidationCSS();});
+
+            //EMAIL SUBMISSION
+            $("#submitForm").click(function () {
+
+                //inputs
+                var email = $('#email').val();
+                var msg = $('#message').val();
+                var name = $('#name').val();
+
+                var data = {
+                    name: name,
+                    email: email,
+                    message:msg
+                };
+
+
+                //check if input respect validation
+                if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
+                    $.ajax({
+
+                        url: "php/contact.php",
+                        type: "POST",
+                        data: data,
+
+                        success: function (data) {
+                            showEmail();
+                            $('#contactme').get(0).reset(); //reset form after submission
+                            <!-- Success notify -->
+
+                            $.Notify({
+                                caption: 'Contact Me',
+                                content: 'Your message has been send',
+                                type: 'success',
+                                icon: "<span class='mif-paper-plane'></span>"
+
+                            });
+                        },
+                        error: function () {
+                            //('Something wrong');
+                            $.Notify({
+                                caption: 'ERROR',
+                                content: 'there was a error with the email system please try again!',
+                                type: 'alert'
+                            });
+                        }
+
+                    });
+                    return false;
+                }
+            });
+            /*ajax form submission mail function*/
+        });
+
+    </script>
+
+</head>
+<body>
+
+<!-- Side Email -->
+<!-- Side Email -->
+<div class="charm right-side padding20 bg-darkGreen" id="charmEmail">
+    <button class="square-button bg-transparent fg-white no-border place-right small-button" onclick="showEmail()">
+        <span class="mif-cross"></span></button>
+    <h1 class="text-light">Contact me</h1>
+    <hr class="thin"/>
+    <form data-role="validator" data-on-submit="submit" id="contactme" method="POST" action="php/contact.php">
+        <label class="block fg-white">Name</label>
+
+        <div class="input-control text block">
+            <input
+
+                    id="name"
+                    placeholder="your name"
+                    data-validate-func="required"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Email</label>
+
+        <div class="input-control text block">
+            <input
+                    id="email"
+                    placeholder="user@domain.com"
+                    data-validate-func="email"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Message</label>
+
+        <div class="input-control textarea block">
+            <textarea
+                    class="input-control textarea "
+                    id="message"
+                    placeholder="your message"
+                    data-validate-func="required"
+                    ></textarea>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <div class="padding10 no-padding-left block">
+            <button id="submitForm" class="button " type="submit">Submit</button>
+            <button class="button alert" id="buttonReset" type="reset">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<!-- MAIN CONTENT-->
+<div class="tile-area tile-area-scheme-dark fg-white">
+    <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a> Interest</h1>
+
+    <div class="tile-area-controls">
+        <button class="test image-button bg-transparent fg-white bg-hover-dark no-border">
+            <span class="header no-margin text-light">Michal Wozniak</span>
+            <span class="test1 icon mif-user"></span>
+        </button>
+    </div>
+
+    <div class="tile-group one">
+        <span class="tile-group-title">General</span>
+
+        <div class="tile-container">
+
+            <a href="About.html" class="tile bg-red fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-user"></span>
+                </div>
+                <span class="tile-label">About</span>
+            </a>
+
+            <a href="Projects.html" class="tile bg-orange fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-suitcase"></span>
+                </div>
+                <span class="tile-label">Projects</span>
+            </a>
+
+            <a href="index.html" class="tile bg-active-lightBlue fg-lightBlue" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-home"></span>
+                </div>
+                <span class="tile-label">Home</span>
+            </a>
+
+            <div class="tile bg-darkGreen fg-white" data-role="tile" onclick="showEmail()">
+                <div class="tile-content iconic">
+                    <span class="icon mif-envelop"></span>
+                </div>
+                <span class="tile-label">Contact</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tile-group double">
+        <span class="tile-group-title">News</span>
+
+        <div class="tile-container">
+
+        </div>
+    </div>
+
+    <div class="tile-group double">
+        <span class="tile-group-title"></span>
+
+
+    </div>
+
+    <div class="tile-group double">
+        <span class="tile-group-title">Recent project</span>
+
+        <div class="tile-container">
+
+        </div>
+    </div>
+
+    <div class="tile-group double">
+        <span class="tile-group-title">Social</span>
+
+        <div class="tile-container">
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

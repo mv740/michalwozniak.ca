@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="css/metro.min.css" rel="stylesheet">
+    <link href="css/metro-icons.min.css" rel="stylesheet">
+    <link href="css/michalwozniak.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/metro.min.js"></script>
+    <script src="js/michalwozniak.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('form').on('reset', function(e){clearValidationCSS();});
+            //EMAIL SUBMISSION
+            $("#submitForm").click(function () {
+
+                //inputs
+                var email = $('#email').val();
+                var msg = $('#message').val();
+                var name = $('#name').val();
+
+                var data = {
+                    name: name,
+                    email: email,
+                    message:msg
+                };
+
+
+                //check if input respect validation
+                if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
+                    $.ajax({
+
+                        url: "php/contact.php",
+                        type: "POST",
+                        data: data,
+
+                        success: function (data) {
+                            showEmail();
+                            $('#contactme').get(0).reset(); //reset form after submission
+                            <!-- Success notify -->
+
+                            $.Notify({
+                                caption: 'Contact Me',
+                                content: 'Your message has been send',
+                                type: 'success',
+                                icon: "<span class='mif-paper-plane'></span>"
+
+                            });
+                        },
+                        error: function () {
+                            //('Something wrong');
+                            $.Notify({
+                                caption: 'ERROR',
+                                content: 'there was a error with the email system please try again!',
+                                type: 'alert'
+                            });
+                        }
+
+                    });
+                    return false;
+                }
+            });
+            /*ajax form submission mail function*/
+        });
+
+    </script>
+
+</head>
+<body>
+<!-- Side Email -->
+<div class="charm right-side padding20 bg-darkGreen" id="charmEmail">
+    <button class="square-button bg-transparent fg-white no-border place-right small-button" onclick="showEmail()">
+        <span class="mif-cross"></span></button>
+    <h1 class="text-light">Contact me</h1>
+    <hr class="thin"/>
+    <form data-role="validator" data-on-submit="submit" id="contactme" method="POST" action="php/contact.php">
+        <label class="block fg-white">Name</label>
+
+        <div class="input-control text block">
+            <input
+
+                    id="name"
+                    name="user_name"
+                    placeholder="your name"
+                    data-validate-func="required"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Email</label>
+
+        <div class="input-control text block">
+            <input
+                    id="email"
+                    name="user_email"
+                    placeholder="user@domain.com"
+                    data-validate-func="email"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Message</label>
+
+        <div class="input-control textarea block">
+            <textarea
+                    class="input-control textarea "
+                    id="message"
+                    name="user_message"
+                    placeholder="your message"
+                    data-validate-func="required"
+                    ></textarea>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <div class="padding10 no-padding-left block">
+            <button id="submitForm" class="button " type="submit">Submit</button>
+            <button class="button alert"  id="buttonReset" type="reset">Cancel</button>
+        </div>
+    </form>
+</div>
+
+
+<!-- MAIN CONTENT-->
+<div class="tile-area tile-area-scheme-dark fg-white">
+    <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a> About</h1>
+
+    <div class="tile-area-controls">
+        <button class="test image-button bg-transparent fg-white bg-hover-dark no-border">
+            <span class="header no-margin text-light">Michal Wozniak</span>
+            <span class="test1 icon mif-user"></span>
+        </button>
+    </div>
+
+    <div class="tile-group one">
+        <span class="tile-group-title">General</span>
+
+        <div class="tile-container">
+
+            <a href="index.html" class="tile bg-active-red fg-red" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-home"></span>
+                </div>
+                <span class="tile-label">Home</span>
+            </a>
+
+            <a href="Projects.html" class="tile bg-orange fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-suitcase"></span>
+                </div>
+                <span class="tile-label">Projects</span>
+            </a>
+
+            <a href="Interest.html" class="tile bg-lightBlue fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-star-empty"></span>
+                </div>
+                <span class="tile-label">Interest</span>
+            </a>
+
+            <div class="tile bg-darkGreen fg-white" data-role="tile" onclick="showEmail()">
+                <div class="tile-content iconic">
+                    <span class="icon mif-envelop"></span>
+                </div>
+                <span class="tile-label">Contact</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="tile-group double">
+        <span class="tile-group-title"></span>
+
+        <div class="tile wide-tile">
+            <div class="tile-content">
+                <div class="image-container">
+                    <div class="frame">
+                        <img src="img/rsz_2michalwozniaklogo.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tile-wide">
+            <div class="panel ">
+                <div class="heading">
+                    <span class="icon mif-user"></span>
+                    <span class="title">About me</span>
+                </div>
+                <div class="content ">
+                    <p>
+                        My name is Michal, I am currently completing my Bachelor of Engineering in Software at
+                    University Concordia in Montreal, Canada. Web and software development are my passion.
+                    </p>
+                    <p>
+                        In my spare time, I will be at the gym, or playing around with my new toy of the month : rasperry pi, ardruino , leapmotion...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tile-group quadro">
+        <span class="tile-group-title"></span>
+        <div class="tile-container">
+            <div class="tile-super">
+                <div class="panel">
+                    <div class="heading">
+                        <span class="icon mif-school"></span>
+                        <span class="title">Education</span>
+                    </div>
+                    <div class="content fg-black">
+                        <div>
+                            <ul class="no-padding" style="list-style: none">
+                                <li>
+                                    <h5>
+                                        <span class="mif-chevron-thin-right"></span>Bachelor of Software Engineering <span class="place-right">Expected 2017</span>
+                                    </h5>
+                                </li>
+                                <ul>
+                                    <li style="list-style: none"><div class="text-left"> University Concordia, Montreal, Canada</div></li>
+                                </ul>
+                            </ul>
+                        </div>
+                        <br/>
+                        <div>
+                            <ul class="no-padding" style="list-style: none">
+                                <li>
+                                    <h5><span class="mif-chevron-thin-right"></span>College Diploma, Pure And Applied Science<span class="place-right">2011</span></h5>
+                                </li>
+                                <ul>
+                                    <li style="list-style: none"><div class="text-left">College De Maisonneuve, Montreal, Canada </div></li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="heading">
+                        <span class="icon mif-file-binary"></span>
+                        <span class="title">Skills</span>
+                    </div>
+                    <div class="content ">
+                        <p class="fg-darkBlue"><span class="mif-chevron-thin-right "></span>Language</p>
+                        <div class="listview list-type-listing">
+                            <div class="list">
+                                <span class="list-title">C#</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Java</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">JavaScript</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">HTML/CSS</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">Php</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">SQL</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Neo4j</span>
+                            </div>
+                        </div>
+                        <p class="fg-darkBlue"><span class="mif-chevron-thin-right "></span>Tools</p>
+                        <div class="listview list-type-listing">
+                            <div class="list">
+                                <span class="list-title">Visual Studio</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Eclipse</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">Phpmyadmin</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Git</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">GitHub</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">Windows Server 2012</span>
+                            </div>
+                        </div>
+                        <p class="fg-darkBlue"><span class="mif-chevron-thin-right "></span>Frameworks</p>
+                        <div class="listview list-type-listing">
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Bootstrap</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">Asp.Net</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-icon icon-font-icon"></span>
+                                <span class="list-title">CodeIgniter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="tile-group double">
+        <span class="tile-group-title"></span>
+
+        <div class="tile-container">
+            <a href="https://ca.linkedin.com/in/mv740" class="tile-wide bg-crimson fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-download"></span>
+                </div>
+                <span class="tile-label">Resume</span>
+            </a>
+            <a href="https://github.com/mv740" class="tile bg-gray fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-github"></span>
+                </div>
+                <span class="tile-label">Github</span>
+            </a>
+            <a href="https://ca.linkedin.com/in/mv740" class="tile bg-darkBlue fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-linkedin"></span>
+                </div>
+                <span class="tile-label">Linkedin</span>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

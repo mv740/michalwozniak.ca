@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="css/metro.min.css" rel="stylesheet">
+    <link href="css/metro-icons.min.css" rel="stylesheet">
+    <link href="css/michalwozniak.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/metro.min.js"></script>
+    <script src="js/michalwozniak.js"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            //which project to display
+            selectedProject();
+            //email reset form
+            $('form').on('reset', function(e){clearValidationCSS();});
+
+
+
+
+
+
+            function selectedProject()
+            {
+                var linkProject = getURLParameter('project');
+                //testing
+                //alert(linkProject);
+                switch(linkProject)
+                {
+                    case '2':
+                        project2();
+                        break;
+                    case '3':
+                        project3();
+                        break;
+                    case '4':
+                        project4();
+                        break;
+                    default :
+                            //alert("default");
+                        $("#result").load("projects-info.html #1-info");
+                        $("#result2").load("projects-info.html #1-picture");
+                }
+
+            }
+
+            function resetColor() {
+                var $this1 = $('#1');
+                var $this2 = $('#2');
+                var $this3 = $('#3');
+                var $this4 = $('#4');
+
+                if ($this1.hasClass('bg-active-lightTeal')) {
+                    $this1.toggleClass('bg-lightTeal bg-active-lightTeal').toggleClass('fg-white fg-lightTeal');
+                }
+                if ($this2.hasClass('bg-active-darkCrimson')) {
+                    $this2.toggleClass('bg-darkCrimson bg-active-darkCrimson').toggleClass('fg-white fg-darkCrimson');
+                }
+                if ($this3.hasClass('bg-active-cyan')) {
+                    $this3.toggleClass('bg-cyan bg-active-cyan').toggleClass('fg-white fg-cyan');
+                }
+                if ($this4.hasClass('bg-active-lightGreen')) {
+                    $this4.toggleClass('bg-lightGreen bg-active-lightGreen').toggleClass('fg-white fg-lightGreen');
+                }
+            }
+
+            function project1()
+            {
+                resetColor();
+                $("#1").toggleClass('bg-lightTeal bg-active-lightTeal').toggleClass('fg-white fg-lightTeal');
+                $("#result").load("projects-info.html #1-info");
+                $("#result2").load("projects-info.html #1-picture");
+            }
+            function project2()
+            {
+                resetColor();
+                $("#2").toggleClass('bg-darkCrimson bg-active-darkCrimson').toggleClass('fg-white fg-darkCrimson');
+                $("#result").load("projects-info.html #2-info");
+                $("#result2").load("projects-info.html #2-picture");
+            }
+
+            function project3()
+            {
+                resetColor();
+                $("#3").toggleClass('bg-cyan bg-active-cyan').toggleClass('fg-white fg-cyan');
+                $("#result").load("projects-info.html #3-info");
+                $("#result2").load("projects-info.html #3-picture");
+            }
+
+            function project4()
+            {
+                resetColor();
+                $("#4").toggleClass('bg-lightGreen bg-active-lightGreen').toggleClass('fg-white fg-lightGreen');
+                $("#result").load("projects-info.html #4-info");
+                $("#result2").load("projects-info.html #4-picture");
+            }
+
+            $("div").click(function () {
+
+                if ($(this).is("#1")) {
+                    project1();
+                }
+                if ($(this).is("#2")) {
+                    project2();
+                }
+                if ($(this).is("#3")) {
+                    project3()
+                }
+                if ($(this).is("#4")) {
+                    project4();
+                }
+            });
+
+            //EMAIL SUBMISSION
+            $("#submitForm").click(function () {
+
+                //inputs
+                var email = $('#email').val();
+                var msg = $('#message').val();
+                var name = $('#name').val();
+
+                var data = {
+                    name: name,
+                    email: email,
+                    message:msg
+                };
+
+
+                //check if input respect validation
+                if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
+                    $.ajax({
+
+                        url: "php/contact.php",
+                        type: "POST",
+                        data: data,
+
+                        success: function (data) {
+                            showEmail();
+                            $('#contactme').get(0).reset(); //reset form after submission
+                            <!-- Success notify -->
+
+                            $.Notify({
+                                caption: 'Contact Me',
+                                content: 'Your message has been send',
+                                type: 'success',
+                                icon: "<span class='mif-paper-plane'></span>"
+
+                            });
+                        },
+                        error: function () {
+                            //('Something wrong');
+                            $.Notify({
+                                caption: 'ERROR',
+                                content: 'there was a error with the email system please try again!',
+                                type: 'alert'
+                            });
+                        }
+
+                    });
+                    return false;
+                }
+            });
+            /*ajax form submission mail function*/
+        });
+    </script>
+</head>
+<body>
+
+
+<!-- Side Email -->
+<!-- Side Email -->
+<div class="charm right-side padding20 bg-darkGreen" id="charmEmail">
+    <button class="square-button bg-transparent fg-white no-border place-right small-button" onclick="showEmail()">
+        <span class="mif-cross"></span></button>
+    <h1 class="text-light">Contact me</h1>
+    <hr class="thin"/>
+    <form data-role="validator" data-on-submit="submit" id="contactme" method="POST" action="php/contact.php">
+        <label class="block fg-white">Name</label>
+
+        <div class="input-control text block">
+            <input
+
+                    id="name"
+                    placeholder="your name"
+                    data-validate-func="required"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Email</label>
+
+        <div class="input-control text block">
+            <input
+                    id="email"
+                    placeholder="user@domain.com"
+                    data-validate-func="email"
+                    type="text">
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <label class="block fg-white">Message</label>
+
+        <div class="input-control textarea block">
+            <textarea
+                    class="input-control textarea "
+                    id="message"
+                    placeholder="your message"
+                    data-validate-func="required"
+                    ></textarea>
+            <span class="input-state-error mif-warning"></span>
+            <span class="input-state-success mif-checkmark"></span>
+        </div>
+        <div class="padding10 no-padding-left block">
+            <button id="submitForm" class="button " type="submit">Submit</button>
+            <button class="button alert" id="buttonReset" type="reset">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<!-- MAIN CONTENT-->
+<div class="tile-area tile-area-scheme-dark fg-white">
+    <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a>
+        Projects</h1>
+
+    <div class="tile-group one">
+        <span class="tile-group-title">General</span>
+
+        <div class="tile-container">
+
+            <a href="About.html" class="tile bg-red fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-user"></span>
+                </div>
+                <span class="tile-label">About</span>
+            </a>
+
+            <a href="index.html" class="tile bg-active-orange fg-orange" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-home"></span>
+                </div>
+                <span class="tile-label">Home</span>
+            </a>
+
+            <a href="Interest.html" class="tile bg-lightBlue fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-star-empty"></span>
+                </div>
+                <span class="tile-label">Interest</span>
+            </a>
+
+            <div class="tile bg-darkGreen fg-white" data-role="tile" onclick="showEmail()">
+                <div class="tile-content iconic">
+                    <span class="icon mif-envelop"></span>
+                </div>
+                <span class="tile-label">Contact</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tile-group double">
+        <span class="tile-group-title">Recent project</span>
+
+        <div class="tile-container">
+            <div id="1" class="tile-wide bg-active-lightTeal fg-lightTeal" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-bubbles"></span>
+                </div>
+                <span class="tile-label">Twibbler</span>
+            </div>
+            <div id="2" class="tile-wide bg-darkCrimson fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-contacts-mail"></span>
+                </div>
+                <span class="tile-label">Powon</span>
+            </div>
+            <div id="3" class="tile-wide bg-cyan fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-calendar"></span>
+                </div>
+                <div class="tile-label">DreamScheduler</div>
+            </div>
+            <div id="4" class="tile-wide bg-lightGreen fg-white" data-role="tile">
+                <div class="tile-content iconic">
+                    <span class="icon mif-calculator"></span>
+                </div>
+                <div class="tile-label">Calculator</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tile-group triple">
+        <span class="tile-group-title"></span>
+
+        <div class="tile-container" id="result">
+        </div>
+
+    </div>
+    <div class="tile-group triple">
+        <span class="tile-group-title"></span>
+
+        <div class="tile-container" id="result2">
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

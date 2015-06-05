@@ -1,0 +1,133 @@
+.tile-area-controls {
+    position: fixed;
+    right: 40px;
+    top: 40px;
+}
+
+.tile-group {
+    left: 100px;
+}
+
+
+.tile, .tile-small, .tile-square, .tile-wide, .tile-large, .tile-big, .tile-super {
+    opacity: 0;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+}
+
+/*testing         */
+.Viewfix {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+}
+
+.charm.right-side {
+    width: 300px;
+    right: -300px;
+}
+
+
+@media screen and (max-width: 640px) {
+    .tile-area {
+        overflow-y: scroll;
+    }
+
+    .tile-area-controls {
+        display: none;
+    }
+
+    .tile-group.one {
+        width: 320px;
+    }
+
+    .tile.super-tile {
+        width: 150px;
+    }
+    .tile-group.four,
+    .tile-group.quadro {
+        width: 320px;
+    }
+
+
+}
+
+@media screen and (max-width: 320px) {
+    .tile-area {
+        overflow-y: scroll;
+    }
+
+    .tile-area-controls {
+        display: none;
+    }
+
+    .tile-group.one {
+        width: 320px;
+    }
+
+    .tile.super-tile {
+        width: 150px;
+    }
+
+    .tile-group.four,
+    .tile-group.quadro {
+        width: 320px;
+    }
+
+
+}
+/* used because there is a conflict with "icon" keyword between metro.css and simpleWeather.css  */
+.test {
+    padding-left: 1rem;
+    padding-right: 2.75rem;
+}
+.test1 {
+    right: 0;
+    left: auto !important;
+}
+
+/*
+    new color for panels
+*/
+
+.panel.lightTealPanel > .heading {
+    background-color: #45fffd;
+}
+.panel.darkCrimsonPanel >.heading{
+    background-color: #640024;
+}
+.panel.lightGreenPanel >.heading{
+    background-color: #7ad61d;
+}
+.panel.lightBluePanel >.heading{
+    background-color: #4390df;
+}
+
+.panel > .heading > .icon1 + .title {
+    margin-left: 3.625rem;
+}
+
+.panel > .heading > .icon1 {
+    position: absolute;
+    background-color: dimgray;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    vertical-align: middle;
+    height: 2.625rem;
+    width: 2.625rem;
+    text-align: center;
+    padding: .625rem;
+}
+
+/*new color for INFORMATION TAG*/
+
+.tag.Technology {
+    background-color: dimgray;
+    color: #ffffff;
+}
+
+.input-control .Test111 textarea{
+    padding-top: 40px;
+    margin-top: 1000px;
+}
