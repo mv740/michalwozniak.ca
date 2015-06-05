@@ -1,2 +1,0 @@
-# michalwozniak.ca
-my website
