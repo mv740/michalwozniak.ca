@@ -11339,7 +11339,7 @@ input[type="submit"].dropdown-toggle.drop-marker-light:after {
   .tile-area:not(.no-responsive-future) .tile-group {
     margin: 0 !important;
     padding: 0 !important;
-    float: none;
+    /*float: none;* /* ERROR this produce a window size for group of somegroupwidth X 0px  */
   }
   .tile-area:not(.no-responsive-future) .tile-group .tile-group-title {
     display: none;

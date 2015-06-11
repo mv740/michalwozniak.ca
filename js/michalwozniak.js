@@ -5,8 +5,7 @@
 // get day for time tile
 
 
-function CurrentTimeData()
-{
+function CurrentTimeData() {
     var d = new Date();
     var weekday = new Array(7);
     weekday[0] = "Sunday";
@@ -25,18 +24,24 @@ function CurrentTimeData()
     $("#day").html(day);
 }
 
-function CurrentWeatherImg(condition)
-{
-    switch (condition)
-    {
-        case "thunderstorms":break;
-        case "showers":break;
-        case "snow":break;
-        case "thunderstorms":break;
-        case "thunderstorms":break;
-        case "thunderstorms":break;
-        case "thunderstorms":break;
-        case "thunderstorms":break;
+function CurrentWeatherImg(condition) {
+    switch (condition) {
+        case "thunderstorms":
+            break;
+        case "showers":
+            break;
+        case "snow":
+            break;
+        case "thunderstorms":
+            break;
+        case "thunderstorms":
+            break;
+        case "thunderstorms":
+            break;
+        case "thunderstorms":
+            break;
+        case "thunderstorms":
+            break;
 
     }
 }
@@ -80,7 +85,7 @@ function showEmail() {
     if (!charm.data('hidden')) {
 
         charm.animate({
-            right: -300
+            right: -320
         });
 
         charm.data('hidden', true);
@@ -168,45 +173,110 @@ $(function () {
 
 //
 function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
 }
 
 
 //http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
 //simple email that test for this basic setup user@domain.tld
-function validateEmail(email)
-{
+function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
-function ContactSuccessRemove()
-{
+function ContactSuccessRemove() {
     clearValidationCSS();
     $("#buttonReset").click(); //reset all the inputs
 }
 
-function clearValidationCSS()
-{
+function clearValidationCSS() {
     $("div.input-control").removeClass('success'); //remvoe the success css
 }
 
-
 //menu tile get resized
-function smallerTile()
-{
+function smallerTile() {
+    $('.project').removeClass('tile-wide').addClass('tile');
     $('.menu').removeClass('tile').addClass('tile-small');
+
 }
-function biggerTile()
-{
+function biggerTile() {
     $('.menu').removeClass('tile-small').addClass('tile');
+    $('.project').removeClass('tile').addClass('tile-wide');
 }
 
 function handleMatchMedia(mediaQuery) {
     if (mediaQuery.matches) {
         smallerTile();
 
+
     } else {
         biggerTile();
     }
 }
+
+
+//
+$(document).ready(function () {
+    //resize menu tile
+    mql = window.matchMedia('all and (max-width: 640px)');
+    handleMatchMedia(mql); //Execute on load
+    mql.addListener(handleMatchMedia); //Execute each time media query will be reached
+
+
+    $('form').on('reset', function (e) {
+        clearValidationCSS();
+    });
+    //EMAIL SUBMISSION
+    $("#submitForm").click(function () {
+
+        //inputs
+        var email = $('#email').val();
+        var msg = $('#message').val();
+        var name = $('#name').val();
+
+        var data = {
+            name: name,
+            email: email,
+            message: msg
+        };
+
+
+        //check if input respect validation
+        if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
+            $.ajax({
+
+                url: "php/contact.php",
+                type: "POST",
+                data: data,
+
+                success: function (data) {
+                    showEmail();
+                    $('#contactme').get(0).reset(); //reset form after submission
+                    <!-- Success notify -->
+
+                    $.Notify({
+                        caption: 'Contact Me',
+                        content: 'Your message has been send',
+                        type: 'success',
+                        icon: "<span class='mif-paper-plane'></span>"
+
+                    });
+                },
+                error: function () {
+                    //('Something wrong');
+                    $.Notify({
+                        caption: 'ERROR',
+                        content: 'there was a error with the email system please try again!',
+                        type: 'alert'
+                    });
+                }
+
+            });
+            return false;
+        }
+    });
+
+
+
+
+});

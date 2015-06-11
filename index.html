@@ -14,18 +14,8 @@
     <script>
         $(document).ready(function () {
 
-            //resize menu tile
-            mql = window.matchMedia('all and (max-width: 640px)');
-            handleMatchMedia(mql); //Execute on load
-            mql.addListener(handleMatchMedia); //Execute each time media query will be reached
-
             //get data for purple tile time
             CurrentTimeData();
-
-
-            $('form').on('reset', function (e) {
-                clearValidationCSS();
-            });
 
             $.simpleWeather({
                 location: 'Montreal, CA',
@@ -42,56 +32,7 @@
                     $("#weather").html('<p>' + error + '</p>');
                 }
             });
-            //EMAIL SUBMISSION
-            $("#submitForm").click(function () {
 
-                //inputs
-                var email = $('#email').val();
-                var msg = $('#message').val();
-                var name = $('#name').val();
-
-                var data = {
-                    name: name,
-                    email: email,
-                    message: msg
-                };
-
-
-                //check if input respect validation
-                if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
-                    $.ajax({
-
-                        url: "php/contact.php",
-                        type: "POST",
-                        data: data,
-
-                        success: function (data) {
-                            showEmail();
-                            $('#contactme').get(0).reset(); //reset form after submission
-                            <!-- Success notify -->
-
-                            $.Notify({
-                                caption: 'Contact Me',
-                                content: 'Your message has been send',
-                                type: 'success',
-                                icon: "<span class='mif-paper-plane'></span>"
-
-                            });
-                        },
-                        error: function () {
-                            //('Something wrong');
-                            $.Notify({
-                                caption: 'ERROR',
-                                content: 'there was a error with the email system please try again!',
-                                type: 'alert'
-                            });
-                        }
-
-                    });
-                    return false;
-                }
-            });
-            /*ajax form submission mail function*/
         });
 
     </script>
@@ -167,9 +108,9 @@
     <h1 class="tile-area-title">Software Developer</h1>
 
     <div class="tile-area-controls">
-        <button class="test image-button bg-transparent fg-white bg-hover-dark no-border">
+        <button class="UserIconFix image-button bg-transparent fg-white bg-hover-dark no-border">
             <span class="header no-margin text-light">Michal Wozniak</span>
-            <span class="test1 icon mif-user"></span>
+            <span class="UserIconFix1 icon mif-user"></span>
         </button>
     </div>
 
@@ -213,19 +154,15 @@
         <span class="tile-group-title">News</span>
 
         <div class="tile-container">
-            <div class="tile-large bg-darkCyan fg-white">
+            <div class="tile-large HelloMsg bg-darkCyan fg-white">
                 <div class="tile-content">
                     <div class="padding10">
-                        <h1>Hello</h1>
-
-                        <p class="tertiary-text fg-white no-margin">
+                        <p class="sub-leader">Hello</p>
+                        <p class="tertiary-text fg-white ">
                             My name is Michal, I am a third year software engineering student studying at Concordia
                             University in Montreal Canada.
                         </p>
-                        <br/>
-                        <br/>
-
-                        <p class="tertiary-text fg-white no-margin">
+                        <p class="tertiary-text fg-white ">
                             Have fun exploring my site <span class="icon mif-rocket mif-lg "></span>
                         </p>
                     </div>
@@ -238,7 +175,7 @@
     <div class="tile-group double">
         <span class="tile-group-title"></span>
 
-        <div class="tile-wide tile-wide large bg-steel fg-white">
+        <div class="tile-wide bg-steel fg-white">
             <div class="tile-content">
                 <div class="align-center">
                     <div class="font" id="weather"></div>
@@ -276,6 +213,8 @@
         </div>
 
     </div>
+
+
 
     <div class="tile-group double">
         <span class="tile-group-title">Recent project</span>

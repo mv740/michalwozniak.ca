@@ -9,64 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/metro.min.js"></script>
     <script src="js/michalwozniak.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            $('form').on('reset', function(e){clearValidationCSS();});
-            //EMAIL SUBMISSION
-            $("#submitForm").click(function () {
-
-                //inputs
-                var email = $('#email').val();
-                var msg = $('#message').val();
-                var name = $('#name').val();
-
-                var data = {
-                    name: name,
-                    email: email,
-                    message:msg
-                };
-
-
-                //check if input respect validation
-                if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
-                    $.ajax({
-
-                        url: "php/contact.php",
-                        type: "POST",
-                        data: data,
-
-                        success: function (data) {
-                            showEmail();
-                            $('#contactme').get(0).reset(); //reset form after submission
-                            <!-- Success notify -->
-
-                            $.Notify({
-                                caption: 'Contact Me',
-                                content: 'Your message has been send',
-                                type: 'success',
-                                icon: "<span class='mif-paper-plane'></span>"
-
-                            });
-                        },
-                        error: function () {
-                            //('Something wrong');
-                            $.Notify({
-                                caption: 'ERROR',
-                                content: 'there was a error with the email system please try again!',
-                                type: 'alert'
-                            });
-                        }
-
-                    });
-                    return false;
-                }
-            });
-            /*ajax form submission mail function*/
-        });
-
-    </script>
-
 </head>
 <body>
 <!-- Side Email -->
@@ -138,28 +80,28 @@
 
         <div class="tile-container">
 
-            <a href="index.html" class="tile bg-active-red fg-red" data-role="tile">
+            <a href="index.html" class="menu tile bg-active-red fg-red" data-role="tile">
                 <div class="tile-content iconic">
                     <span class="icon mif-home"></span>
                 </div>
                 <span class="tile-label">Home</span>
             </a>
 
-            <a href="Projects.html" class="tile bg-orange fg-white" data-role="tile">
+            <a href="Projects.html" class="menu tile bg-orange fg-white" data-role="tile">
                 <div class="tile-content iconic">
                     <span class="icon mif-suitcase"></span>
                 </div>
                 <span class="tile-label">Projects</span>
             </a>
 
-            <a href="Interest.html" class="tile bg-lightBlue fg-white" data-role="tile">
+            <a href="Interest.html" class="menu tile bg-lightBlue fg-white" data-role="tile">
                 <div class="tile-content iconic">
                     <span class="icon mif-star-empty"></span>
                 </div>
                 <span class="tile-label">Interest</span>
             </a>
 
-            <div class="tile bg-darkGreen fg-white" data-role="tile" onclick="showEmail()">
+            <div class="menu tile bg-darkGreen fg-white" data-role="tile" onclick="showEmail()">
                 <div class="tile-content iconic">
                     <span class="icon mif-envelop"></span>
                 </div>
