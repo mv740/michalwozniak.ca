@@ -24,27 +24,7 @@ function CurrentTimeData() {
     $("#day").html(day);
 }
 
-function CurrentWeatherImg(condition) {
-    switch (condition) {
-        case "thunderstorms":
-            break;
-        case "showers":
-            break;
-        case "snow":
-            break;
-        case "thunderstorms":
-            break;
-        case "thunderstorms":
-            break;
-        case "thunderstorms":
-            break;
-        case "thunderstorms":
-            break;
-        case "thunderstorms":
-            break;
 
-    }
-}
 
 function showDialog(id) {
     var dialog = $(id).data('dialog');
@@ -201,7 +181,12 @@ function smallerTile() {
 }
 function biggerTile() {
     $('.menu').removeClass('tile-small').addClass('tile');
-    $('.project').removeClass('tile').addClass('tile-wide');
+    //don't make it bigger because it will go out of the screen
+    if($(window).height > 900)
+    {
+        $('.project').removeClass('tile').addClass('tile-wide');
+    }
+
 }
 
 function handleMatchMedia(mediaQuery) {
@@ -215,10 +200,32 @@ function handleMatchMedia(mediaQuery) {
 }
 
 
-//
+function resizeProjectTile(projectTile)
+{
+    if(projectTile.matches)
+    {
+        $('.project').removeClass('tile-wide').addClass('tile');
+    }
+    else
+    {
+        $('.project').removeClass('tile').addClass('tile-wide');
+    }
+}
+
+
 $(document).ready(function () {
+
+
+
+
+
+    //resize project tile
+    projectTile = window.matchMedia('(min-width: 640px) and (max-height: 900px)');
+    resizeProjectTile(projectTile);
+    projectTile.addListener(resizeProjectTile);
+
     //resize menu tile
-    mql = window.matchMedia('all and (max-width: 640px)');
+    mql = window.matchMedia('(max-width: 640px)');
     handleMatchMedia(mql); //Execute on load
     mql.addListener(handleMatchMedia); //Execute each time media query will be reached
 

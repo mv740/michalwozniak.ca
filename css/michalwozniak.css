@@ -29,6 +29,7 @@
 @media screen and (max-width: 640px) {
     .tile-area {
         overflow-y: scroll;
+        width: auto;
     }
 
     .tile-area-controls {
@@ -48,6 +49,27 @@
         height: auto;
     }
 
+    /*fix margin center when smaller than 640px need to find better way*/
+    .tile-area:not(.no-responsive-future)
+    {
+
+        width: auto !important;
+    }
+
+    .tile-area:not(.no-responsive-future) .tile-group {
+        margin: 0 auto;
+    }
+
+    .tile-large.HelloMsg{
+        height: 170px;
+    }
+
+    .tile-super {
+        height: auto; /* text is smaller so it take less space*/
+    }
+    .tile-group.double {
+        overflow: hidden; /*if some div contain bigger content than regular size tile overflow will occur */
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -63,6 +85,10 @@
         width: 320px;
     }
 
+
+    .tile-area:not(.no-responsive-future) .tile.tile-group{
+        margin: 0 auto;
+    }
 
     .tile-large.HelloMsg{
         height: 170px;
@@ -80,7 +106,22 @@
         overflow: hidden; /*if some div contain bigger content than regular size tile overflow will occur */
     }
 
+
 }
+
+@media screen and (max-height: 900px)
+{
+    /*menu can't fit in linear line of standard group one*/
+    .tile-group.one{
+        width: 320px;
+    }
+
+    .tile.super-tile{
+        height: auto;
+    }
+
+}
+
 
 /* used because there is a conflict with "icon" keyword between metro.css and simpleWeather.css  */
 .UserIconFix {
@@ -143,4 +184,19 @@
 
 .tile-square.AutoHeight{
     height: auto;
+}
+
+
+/* Calendar tile Resize app */
+.CalendarResize{
+    height: auto;
+    width: 600px !important;
+}
+
+@media screen and (max-width: 640px)
+{
+    .CalendarResize{
+        width: 320px !important;
+    }
+
 }

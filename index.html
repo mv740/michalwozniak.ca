@@ -17,6 +17,12 @@
             //get data for purple tile time
             CurrentTimeData();
 
+
+
+            $(".dialog-overlay").click(function(){
+                $(".dialog-close-button").trigger('click');
+            });
+
             $.simpleWeather({
                 location: 'Montreal, CA',
                 woeid: '',
@@ -32,30 +38,28 @@
                     $("#weather").html('<p>' + error + '</p>');
                 }
             });
-
         });
 
     </script>
-
 </head>
 <body>
 <!-- Map Dialog PopUp-->
-<div data-role="dialog" id="dialogMap" class="padding20" data-close-button="true" data-overlay="true"
-     data-overlay-color="op-dark" data-height="440" data-width="560">
-    <div>
-        <iframe width="500" height="400" frameborder="0"
-                src="http://www.bing.com/maps/embed/viewer.aspx?v=3&cp=45.497460~-73.578063&lvl=16&w=500&h=400&sty=r&typ=d&pp=1455%20de%20maisonneuve%20west~~45.497211~-73.578621&ps=&dir=0&mkt=en-ca&src=O365&form=BMEMJS"></iframe>
+<div  data-role="dialog" id="dialogMap" data-close-button="true" data-overlay="true"
+     data-overlay-color="op-dark">
+    <div class="padding20">
+        <iframe  height="400" width="290" frameborder="0"
+                src="http://www.bing.com/maps/embed/viewer.aspx?v=3&cp=45.494650~-73.577570&lvl=16&w=280&h=400&sty=r&typ=d&pp=&ps=&dir=0&mkt=en-us&src=SHELL&form=BMEMJS"></iframe>
     </div>
 </div>
 
 <!-- Calendar Popup -->
-<div data-role="dialog" id="dialogCalendar" class="padding30" data-close-button="true" data-overlay="true"
-     data-overlay-color="op-dark" data-height="auto" data-width="600">
-    <div data-role="calendar"></div>
+<div data-role="dialog"  id="dialogCalendar" class="CalendarResize" data-close-button="true" data-overlay="true"
+     data-overlay-color="op-dark" >
+        <div class="padding30"  data-role="calendar"></div>
 </div>
 
 <!-- Side Email -->
-<div class="charm right-side padding20 bg-darkGreen" id="charmEmail">
+<div class="charm right-side padding10 bg-darkGreen" id="charmEmail">
     <button class="square-button bg-transparent fg-white no-border place-right small-button" onclick="showEmail()">
         <span class="mif-cross"></span></button>
     <h1 class="text-light">Contact me</h1>
@@ -158,10 +162,12 @@
                 <div class="tile-content">
                     <div class="padding10">
                         <p class="sub-leader">Hello</p>
+
                         <p class="tertiary-text fg-white ">
                             My name is Michal, I am a third year software engineering student studying at Concordia
                             University in Montreal Canada.
                         </p>
+
                         <p class="tertiary-text fg-white ">
                             Have fun exploring my site <span class="icon mif-rocket mif-lg "></span>
                         </p>
@@ -184,7 +190,7 @@
 
             <span class="tile-label">Weather-Montreal</span>
         </div>
-        <div class="tile bg-violet fg-white" onclick="showDialog('#dialogMap')">
+        <div class="tile bg-violet fg-white" onclick=" showDialog('#dialogMap');">
             <div class="tile-content iconic">
                 <span class="icon mif-map"></span>
             </div>
@@ -213,7 +219,6 @@
         </div>
 
     </div>
-
 
 
     <div class="tile-group double">
