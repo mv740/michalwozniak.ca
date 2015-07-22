@@ -36,13 +36,13 @@
         display: none;
     }
 
-    .tile-group.one {
+    .tile-group.one, .tile-group.quadro, .tile-group.triple
+    {
         width: 320px;
     }
 
-    .tile-group.triple {
-        width: 320px;
-    }
+
+
 
     .tile.super-tile {
         width: 150px;
@@ -70,6 +70,18 @@
     .tile-group.double {
         overflow: hidden; /*if some div contain bigger content than regular size tile overflow will occur */
     }
+
+
+    /* it is better to specify size of group and put auto for inside object
+    */
+    .tile-big, .tile-super
+    {
+        width: auto;
+    }
+
+    .tile-big, .tile.super-tile{
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -87,7 +99,7 @@
 
 
     .tile-area:not(.no-responsive-future) .tile.tile-group{
-        margin: 0 auto;
+        margin: 0 auto!important;
     }
 
     .tile-large.HelloMsg{
@@ -98,7 +110,7 @@
         height: auto;
     }
 
-    .tile-super {
+    .tile-super, .tile-big {
         height: auto; /* text is smaller so it take less space*/
     }
 
@@ -111,13 +123,10 @@
 
 @media screen and (max-height: 900px)
 {
+
     /*menu can't fit in linear line of standard group one*/
     .tile-group.one{
         width: 320px;
-    }
-
-    .tile.super-tile{
-        height: auto;
     }
 
 }
@@ -178,13 +187,11 @@
     color: #ffffff;
 }
 
-.tile-wide.AutoHeight{
+
+.tile-wide.AutoHeight, .tile-square.AutoHeight, .tile-big.AutoHeight, .tile-super.AutoHeight{
     height: auto;
 }
 
-.tile-square.AutoHeight{
-    height: auto;
-}
 
 
 /* Calendar tile Resize app */

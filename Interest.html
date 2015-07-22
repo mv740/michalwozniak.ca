@@ -7,7 +7,6 @@
     <link href="css/metro-icons.min.css" rel="stylesheet">
     <link href="css/michalwozniak.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
     <script src="js/metro.min.js"></script>
     <script src="js/michalwozniak.js"></script>
 
@@ -65,14 +64,26 @@
     </form>
 </div>
 
+<!-- Dialog video -->
+<div data-role="dialog"  id="videoPool" data-close-button="true" data-overlay="true"
+     data-overlay-color="op-dark" >
+
+        <video width="320" controls>
+            <source src="video/Video_Pool.webm" type="video/webm">
+            <source src="video/Video_Pool.ogg" type="video/ogg">
+            <source src="video/Video_Pool.mp4" type="video/mp4">
+        </video>
+
+</div>
+
 <!-- MAIN CONTENT-->
 <div class="tile-area tile-area-scheme-dark fg-white">
     <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a> Interest</h1>
 
     <div class="tile-area-controls">
-        <button class="test image-button bg-transparent fg-white bg-hover-dark no-border">
+        <button class="UserIconFix image-button bg-transparent fg-white bg-hover-dark no-border">
             <span class="header no-margin text-light">Michal Wozniak</span>
-            <span class="test1 icon mif-user"></span>
+            <span class="UserIconFix1 icon mif-user"></span>
         </button>
     </div>
 
@@ -112,38 +123,127 @@
         </div>
     </div>
 
-    <div class="tile-group double">
-        <span class="tile-group-title">News</span>
-
-        <div class="tile-container">
-
-        </div>
-    </div>
-
-    <div class="tile-group double">
+    <div class="tile-group triple">
         <span class="tile-group-title"></span>
 
-
-    </div>
-
-    <div class="tile-group double">
-        <span class="tile-group-title">Recent project</span>
-
         <div class="tile-container">
+            <div class="tile-big AutoHeight">
+                <div class="panel ">
+                    <div class="heading">
+                        <span class="icon mif-drive"></span>
+                        <span class="title">My server</span>
+                    </div>
+                    <div class="content ">
+                        <p class="tertiary-text  ">
+                            At the beginning I used to share all my files from my main computer, but I didn't want to
+                            keep it turned on all the time. So I build a whitebox server (Intel Xeon E3-1230 V2,
+                            16Gb RAM, 40GB SSD-MainOS, 4x2Tb raid 10 Storage)
+                        </p>
+                        <p class="tertiary-text  ">
+                            Then I started to do some web development and I needed a web server, therefore I installed a virtual
+                            machine that contained apache/mysql on hyper-v. Every time I would add more virtual machines to fulfill my needs.
+                            In total, I currently have 7 virtual machines running all the time.
+                            I'm a bit invested into the windows ecosystem because I really enjoy learning how the whole Windows domain work.
+                        </p>
+                        <br>
+                        <div class="listview list-type-listing ">
+                            <div class="fg-darkBlue">Virtual Machines</div>
+                            <hr class="bg-darkBlue" />
+                            <div class="list">
+                                <span class="list-title">Active Directory</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">IIS</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">PRTG -network monitor</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">RDS</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">SQL 2014</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">WSUS</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">ubuntu</span>
+                            </div>
+                            <div class="list">
+                                <span class="list-title">CENT OS : apache/mysql</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 
-    <div class="tile-group double">
-        <span class="tile-group-title">Social</span>
+    <div class="tile-group triple">
+        <span class="tile-group-title"></span>
 
         <div class="tile-container">
-
-
+            <div class="tile-big tile-super-y AutoHeight">
+                <div class="panel ">
+                    <div class="heading">
+                        <span class="icon mif-security"></span>
+                        <span class="title">Home automation</span>
+                    </div>
+                    <div class="content ">
+                        <p class="tertiary-text  ">
+                            I always wanted to have a home like in those futuristic movies where the house is completely controlled by some sort of AI.
+                            Until that day comes, we need to do it by creating a type of central home automation system.
+                        </p>
+                        <div class="fg-darkBlue">PRTG NETWORK MONITOR</div>
+                        <hr class="bg-darkBlue" />
+                        <p class="tertiary-text  ">
+                            I installed this monitor to be able see what happening on my network. I can see the server's uptime,
+                            traffic and bandwidth usage.
+                        </p>
+                        <div class="fg-darkBlue">SWIMMING POOL SENSOR</div>
+                        <hr class="bg-darkBlue" />
+                        <p class="tertiary-text  ">
+                            Using a ardruino, Temperature Sensor(DS18B20) and a small LCD screen, I created my own pool monitor.
+                            It measures the water temperature and output it on the screen.
+                            <dl>
+                                <dt><span class="text-dashed">IN PROGRESS</span> </dt>
+                                <dd>I will soon add a wireless adapter. The system will be able to send the data to a web server</dd>
+                            </dl>
+                        </p>
+                        <div class="fg-darkBlue">Home Dashboard (IN PROGRESS)</div>
+                        <hr class="bg-darkBlue" />
+                        <p class="tertiary-text">
+                            PRTG is a bit complicated to quickly see what's happening in your network because it is an
+                            enterprise software therefore I will create a simpler interface.
+                            This dashboard will have a graphical presentation of the current status of each virtual machine currently running on my server.
+                            It also shows the values of my pool sensor and any future sensor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tile-group double">
+        <span class="tile-group-title"></span>
+        <div class="tile-wide tile-wide-y bg-orange fg-white" data-role="tile">
+            <div class="tile-content">
+                <div class="carousel" data-role="carousel" data-controls="false" data-markers="true">
+                    <div class="slide"><img src="img/interest/home_server.png"></div>
+                    <div class="slide"><img src="img/interest/PRTG.PNG"></div>
+                    <div class="slide"><img src="img/interest/poolSensor.jpg"></div>
+                </div>
+                <div class="tile-label">Picture</div>
+            </div>
+        </div>
+        <div  onclick="showDialog('#videoPool');" class="tile bg-lightBlue fg-white">
+            <div class="tile-content iconic">
+                <span class="icon mif-video-camera"></span>
+            </div>
+            <span class="tile-label">Pool Sensor</span>
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

@@ -17,12 +17,6 @@
             //get data for purple tile time
             CurrentTimeData();
 
-
-
-            $(".dialog-overlay").click(function(){
-                $(".dialog-close-button").trigger('click');
-            });
-
             $.simpleWeather({
                 location: 'Montreal, CA',
                 woeid: '',
@@ -39,7 +33,6 @@
                 }
             });
         });
-
     </script>
 </head>
 <body>
@@ -141,7 +134,7 @@
                 <div class="tile-content iconic">
                     <span class="icon mif-star-empty"></span>
                 </div>
-                <span class="tile-label">Interest</span>
+                <span class="tile-label">Interests</span>
             </a>
 
             <div class="menu tile bg-darkGreen fg-white" onclick="showEmail()">

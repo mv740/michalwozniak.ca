@@ -25,7 +25,6 @@ function CurrentTimeData() {
 }
 
 
-
 function showDialog(id) {
     var dialog = $(id).data('dialog');
     dialog.open();
@@ -70,11 +69,13 @@ function showEmail() {
 
         charm.data('hidden', true);
         ContactSuccessRemove();
+
     } else {
         charm.animate({
             right: 0
         });
         charm.data('hidden', false);
+        event.stopPropagation();
     }
 }
 
@@ -182,8 +183,7 @@ function smallerTile() {
 function biggerTile() {
     $('.menu').removeClass('tile-small').addClass('tile');
     //don't make it bigger because it will go out of the screen
-    if($(window).height > 900)
-    {
+    if ($(window).height > 900) {
         $('.project').removeClass('tile').addClass('tile-wide');
     }
 
@@ -200,14 +200,11 @@ function handleMatchMedia(mediaQuery) {
 }
 
 
-function resizeProjectTile(projectTile)
-{
-    if(projectTile.matches)
-    {
+function resizeProjectTile(projectTile) {
+    if (projectTile.matches) {
         $('.project').removeClass('tile-wide').addClass('tile');
     }
-    else
-    {
+    else {
         $('.project').removeClass('tile').addClass('tile-wide');
     }
 }
@@ -282,8 +279,6 @@ $(document).ready(function () {
             return false;
         }
     });
-
-
 
 
 });
