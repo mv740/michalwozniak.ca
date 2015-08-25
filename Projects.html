@@ -10,8 +10,7 @@
     <script src="js/metro.min.js"></script>
     <script src="js/michalwozniak.js"></script>
     <script>
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
 
 
             //which project to display
@@ -37,31 +36,27 @@
         });
 
         /*project*/
-        function project1()
-        {
+        function project1() {
             resetColor();
             $("#1").toggleClass('bg-lightTeal bg-active-lightTeal').toggleClass('fg-white fg-lightTeal');
             $("#result").load("projects-info.html #1-info");
             $("#result2").load("projects-info.html #1-picture");
         }
-        function project2()
-        {
+        function project2() {
             resetColor();
             $("#2").toggleClass('bg-darkCrimson bg-active-darkCrimson').toggleClass('fg-white fg-darkCrimson');
             $("#result").load("projects-info.html #2-info");
             $("#result2").load("projects-info.html #2-picture");
         }
 
-        function project3()
-        {
+        function project3() {
             resetColor();
             $("#3").toggleClass('bg-cyan bg-active-cyan').toggleClass('fg-white fg-cyan');
             $("#result").load("projects-info.html #3-info");
             $("#result2").load("projects-info.html #3-picture");
         }
 
-        function project4()
-        {
+        function project4() {
             resetColor();
             $("#4").toggleClass('bg-lightGreen bg-active-lightGreen').toggleClass('fg-white fg-lightGreen');
             $("#result").load("projects-info.html #4-info");
@@ -87,13 +82,11 @@
             }
         }
 
-        function selectedProject()
-        {
+        function selectedProject() {
             var linkProject = getURLParameter('project');
             //testing
             //alert(linkProject);
-            switch(linkProject)
-            {
+            switch (linkProject) {
                 case '2':
                     project2();
                     break;
@@ -167,12 +160,13 @@
 
 <!-- MAIN CONTENT-->
 <div class="tile-area tile-area-scheme-dark fg-white">
-    <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a>Projects</h1>
+    <h1 class="tile-area-title"><a class="fg-darkGreen" href="index.html"><span class="icon mif-home"></span></a> Projects
+    </h1>
 
     <div class="tile-area-controls">
-        <button class="UserIconFix image-button bg-transparent fg-white bg-hover-dark no-border">
+        <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border">
             <span class="header no-margin text-light">Michal Wozniak</span>
-            <span class="UserIconFix1 icon mif-user"></span>
+            <span class="icon mif-user"></span>
         </button>
     </div>
 

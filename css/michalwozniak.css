@@ -133,15 +133,6 @@
 
 
 /* used because there is a conflict with "icon" keyword between metro.css and simpleWeather.css  */
-.UserIconFix {
-    padding-left: 1rem;
-    padding-right: 2.75rem;
-}
-
-.UserIconFix1 {
-    right: 0;
-    left: auto !important;
-}
 
 /*
     new color for panels

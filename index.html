@@ -6,9 +6,7 @@
     <link href="css/metro.min.css" rel="stylesheet">
     <link href="css/metro-icons.min.css" rel="stylesheet">
     <link href="css/michalwozniak.css" rel="stylesheet">
-    <link href="css/simpleWeather.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
     <script src="js/metro.min.js"></script>
     <script src="js/michalwozniak.js"></script>
     <script>
@@ -17,38 +15,72 @@
             //get data for purple tile time
             CurrentTimeData();
 
-            $.simpleWeather({
-                location: 'Montreal, CA',
-                woeid: '',
-                unit: 'c',
-                success: function (weather) {
-                    html = '<h2><i class="icon-' + weather.code + '"></i> ' + weather.temp + '&deg;' + weather.units.temp + '</h2>';
+            var weather_icons = {
+                'clear-day': 'mif-sun',
+                'clear-night':  'mif-moon2',
+                'rain': 'mif-rainy',
+                'snow': 'mif-snowy3',
+                'sleet': 'mif-weather4',
+                'wind': 'mif-wind',
+                'fog': 'mif-cloudy2',
+                'cloudy': 'mif-cloudy',
+                'partly-cloudy-day': 'mif-cloudy3',
+                'partly-cloudy-night': 'mif-cloud5'
+            };
+            $(function () {
+                var lat = '45.5779';
+                var long = '-73.5304';
+                var geolocation = lat + ',' + long;
 
-                    $("#weather").html(html);
-
-
-                },
-                error: function (error) {
-                    $("#weather").html('<p>' + error + '</p>');
-                }
+                $.ajax({
+                    url: 'https://api.forecast.io/forecast/b05c6855b18c2f748275aa5e757ed914/' + geolocation + '?exclude=minutely,hourly,flags&units=si',
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        console.log(data);
+                        //do whatever you want with the data here
+                        var current = data.currently;
+                        $('#city_name').html('Montreal, Canada');
+                        $("#city_temp").html(Math.round(current.temperature) + " &deg;C");
+                        $("#city_weather").html(current.summary);
+                        $("#city_weather_daily").html(data.daily.summary);
+                        $("#weather_icon").addClass(weather_icons[current.icon]);
+                        $("#weather_bg").css({
+                            'background-image': 'url(img/weather/' + current.icon + '.jpg' + ')'
+                        });
+                        console.log('img/weather/' + current.icon + '.jpg');
+                    },
+                    error: function () {
+                        $("#city_temp").html("Temperature API is down !!");
+                    }
+                });
             });
+            /* for testing
+            $('#city_name').html('Montreal, Canada');
+            $("#city_temp").html(Math.round(25.6) + " &deg;C");
+            $("#city_weather_daily").html("glglglglglglgllglglgglgllg");
+            $("#city_weather").html("YO");
+            $("#weather_icon").addClass(weather_icons['partly-cloudy-night']);
+            $("#weather_bg").css({
+                'background-image': 'url(img/weather/' + 'partly-cloudy-night' + '.jpg' + ')'
+            });
+            */
         });
     </script>
 </head>
 <body>
 <!-- Map Dialog PopUp-->
-<div  data-role="dialog" id="dialogMap" data-close-button="true" data-overlay="true"
+<div data-role="dialog" id="dialogMap" data-close-button="true" data-overlay="true"
      data-overlay-color="op-dark">
     <div class="padding20">
-        <iframe  height="400" width="290" frameborder="0"
+        <iframe height="400" width="290" frameborder="0"
                 src="http://www.bing.com/maps/embed/viewer.aspx?v=3&cp=45.494650~-73.577570&lvl=16&w=280&h=400&sty=r&typ=d&pp=&ps=&dir=0&mkt=en-us&src=SHELL&form=BMEMJS"></iframe>
     </div>
 </div>
 
 <!-- Calendar Popup -->
-<div data-role="dialog"  id="dialogCalendar" class="CalendarResize" data-close-button="true" data-overlay="true"
-     data-overlay-color="op-dark" >
-        <div class="padding30"  data-role="calendar"></div>
+<div data-role="dialog" id="dialogCalendar" class="CalendarResize" data-close-button="true" data-overlay="true"
+     data-overlay-color="op-dark">
+    <div class="padding30" data-role="calendar"></div>
 </div>
 
 <!-- Side Email -->
@@ -105,9 +137,9 @@
     <h1 class="tile-area-title">Software Developer</h1>
 
     <div class="tile-area-controls">
-        <button class="UserIconFix image-button bg-transparent fg-white bg-hover-dark no-border">
+        <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border">
             <span class="header no-margin text-light">Michal Wozniak</span>
-            <span class="UserIconFix1 icon mif-user"></span>
+            <span class="icon mif-user"></span>
         </button>
     </div>
 
@@ -154,7 +186,7 @@
             <div class="tile-large HelloMsg bg-darkCyan fg-white">
                 <div class="tile-content">
                     <div class="padding10">
-                        <p class="sub-leader">Hello</p>
+                        <h3>Hello</h3>
 
                         <p class="tertiary-text fg-white ">
                             My name is Michal, I am a third year software engineering student studying at Concordia
@@ -174,15 +206,25 @@
     <div class="tile-group double">
         <span class="tile-group-title"></span>
 
-        <div class="tile-wide bg-steel fg-white">
-            <div class="tile-content">
-                <div class="align-center">
-                    <div class="font" id="weather"></div>
+        <div class="tile-large bg-darkBlue fg-white">
+            <div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
+                <div class="padding10">
+                    <h3 id="city_weather"></h3>
+
+                    <h1 id="city_temp"></h1>
+
+                    <h3 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 20px;"></h3>
+
+                    <h4 id="city_name"></h4>
+
+                    <p id="city_weather_daily"></p>
+
                 </div>
             </div>
+            <span class="tile-label">Weather</span>
 
-            <span class="tile-label">Weather-Montreal</span>
         </div>
+
         <div class="tile bg-violet fg-white" onclick=" showDialog('#dialogMap');">
             <div class="tile-content iconic">
                 <span class="icon mif-map"></span>
@@ -194,20 +236,11 @@
              onclick="showDialog('#dialogCalendar')">
 
             <div class="tile-content">
-                <div class="live-slide">
-                    <div class="align-right padding10">
-                        <div class="leader fg-white no-margin iconic" id="date"></div>
-
-                        <p class="fg-white subtitle" id="day"></p>
-                    </div>
-                    <span class="tile-label">Calendar</span>
+                <div class="align-right padding10">
+                    <div class="fg-white subtitle" id="day"></div>
+                    <h1 style="font-size: 45px;" class=" fg-white no-margin" id="date"></h1>
                 </div>
-                <div class="live-slide">
-                    <div class="tile-content iconic">
-                        <span class="icon mif-calendar"></span>
-                    </div>
-                    <span class="tile-label">Calendar</span>
-                </div>
+                <span class="tile-label">Calendar</span>
             </div>
         </div>
 
