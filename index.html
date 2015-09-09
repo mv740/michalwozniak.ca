@@ -4,12 +4,12 @@
     <title>Home</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="css/metro.min.css" rel="stylesheet">
-    <link href="css/metro-icons.min.css" rel="stylesheet">
-    <link href="css/michalwozniak.css" rel="stylesheet">
+    <link href="assets/css/metro.min.css" rel="stylesheet">
+    <link href="assets/css/metro-icons.min.css" rel="stylesheet">
+    <link href="assets/css/michalwozniak.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/metro.min.js"></script>
-    <script src="js/michalwozniak.js"></script>
+    <script src="assets/js/metro.min.js"></script>
+    <script src="assets/js/michalwozniak.js"></script>
     <script>
         $(document).ready(function () {
 
@@ -46,7 +46,7 @@
                         $("#city_weather_daily").html(data.daily.summary);
                         $("#weather_icon").addClass(weather_icons[current.icon]);
                         $("#weather_bg").css({
-                            'background-image': 'url(img/weather/' + current.icon + '.jpg' + ')'
+                            'background-image': 'url(assets/img/weather/' + current.icon + '.jpg' + ')'
                         });
                         console.log('img/weather/' + current.icon + '.jpg');
                     },
@@ -90,7 +90,7 @@
         <span class="mif-cross"></span></button>
     <h1 class="text-light">Contact me</h1>
     <hr class="thin"/>
-    <form data-role="validator" data-on-submit="submit" id="contactme" method="POST" action="php/contact.php">
+    <form data-role="validator" data-on-submit="submit" id="contactme" method="POST" action="assets/php/contact.php">
         <label class="block fg-white">Name</label>
 
         <div class="input-control text block">

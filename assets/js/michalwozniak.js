@@ -212,10 +212,6 @@ function resizeProjectTile(projectTile) {
 
 $(document).ready(function () {
 
-
-
-
-
     //resize project tile
     projectTile = window.matchMedia('(min-width: 640px) and (max-height: 900px)');
     resizeProjectTile(projectTile);
@@ -249,7 +245,7 @@ $(document).ready(function () {
         if (((validateEmail(email)) && (msg.length > 0) && (name.length > 0))) {
             $.ajax({
 
-                url: "php/contact.php",
+                url: "assets/php/contact.php",
                 type: "POST",
                 data: data,
 
